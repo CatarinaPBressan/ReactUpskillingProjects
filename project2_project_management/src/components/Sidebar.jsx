@@ -1,8 +1,12 @@
-export default function Sidebar({ projects, onSelectProject }) {
+export default function Sidebar({
+  projects,
+  onSelectProject,
+  onAddProjectClick,
+}) {
   return (
     <aside>
       <h3>Your Projects</h3>
-      <button>+ Add Project</button>
+      <button onClick={onAddProjectClick}>+ Add Project</button>
       <ul>
         {projects.map((project) => (
           <li key={project.title}>

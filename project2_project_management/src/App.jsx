@@ -51,11 +51,23 @@ function App() {
     ]);
   };
 
+  const handleAddProjectClick = () => {
+    setIsCreatingProject(true);
+  };
+
+  const handleCancelCreatingProjectClick = () => {};
+
   return (
     <div id="pageContainer">
-      <Sidebar projects={projects} onSelectProject={handleSelectProject} />
+      <Sidebar
+        projects={projects}
+        onSelectProject={handleSelectProject}
+        onAddProjectClick={handleAddProjectClick}
+      />
       <main>
-        {!selectedProject && !isCreatingProject && <NoProjectPage />}
+        {!selectedProject && !isCreatingProject && (
+          <NoProjectPage onAddProjectClick={handleAddProjectClick} />
+        )}
         {!selectedProject && isCreatingProject && <CreateProjectPage />}
         {selectedProject && (
           <ProjectPage
