@@ -14,20 +14,7 @@ projects:
   tasks: ["Implement the React Project Management project"]
 }]*/
 function App() {
-  const [projects, setProjects] = useState([
-    {
-      title: "Project Title",
-      dueDate: "04/09/2026",
-      description: "Project descriptionzzzzz",
-      tasks: [],
-    },
-    {
-      title: "Project Title2",
-      dueDate: "20/09/2026",
-      description: "Project descriptionaaaaaa",
-      tasks: ["Implement the React Project Management project"],
-    },
-  ]);
+  const [projects, setProjects] = useState([]);
   const [isCreatingProject, setIsCreatingProject] = useState(false);
   const [selectedProject, setSelectedProject] = useState(undefined);
 
@@ -52,10 +39,19 @@ function App() {
   };
 
   const handleAddProjectClick = () => {
+    setSelectedProject(undefined);
     setIsCreatingProject(true);
   };
 
-  const handleCancelCreatingProjectClick = () => {};
+  const handleCancelCreatingProjectClick = () => {
+    setIsCreatingProject(false);
+  };
+
+  const handleCreateProjectClick = (projectData) => {
+    const newProject = { ...projectData, tasks: [] };
+    setProjects([...projects, newProject]);
+    setIsCreatingProject(false);
+  };
 
   return (
     <div id="pageContainer">
@@ -68,7 +64,12 @@ function App() {
         {!selectedProject && !isCreatingProject && (
           <NoProjectPage onAddProjectClick={handleAddProjectClick} />
         )}
-        {!selectedProject && isCreatingProject && <CreateProjectPage />}
+        {!selectedProject && isCreatingProject && (
+          <CreateProjectPage
+            onCancelClick={handleCancelCreatingProjectClick}
+            onCreateProjectClick={handleCreateProjectClick}
+          />
+        )}
         {selectedProject && (
           <ProjectPage
             project={selectedProject}
