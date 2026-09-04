@@ -1,11 +1,17 @@
 import { useState } from "react";
 
-export default function ProjectPage({ project, onClearProjectTaskClick }) {
+export default function ProjectPage({
+  project,
+  onClearProjectTaskClick,
+  onDeleteProjectClick,
+}) {
   return (
     <div id="projectPage" className="page">
       <h1>{project.title}</h1>
       <div className="controls">
-        <button>Delete</button>
+        <button onClick={() => onDeleteProjectClick(project.title)}>
+          Delete
+        </button>
       </div>
       <div className="project-info">
         <p className="due-date">{project.dueDate}</p>

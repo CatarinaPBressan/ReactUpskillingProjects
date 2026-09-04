@@ -40,18 +40,15 @@ function App() {
 
   const handleClearProjectTask = (task) => {
     setSelectedProject((prevSelectedProject) => {
-      console.log(prevSelectedProject);
-      console.log("trying to clear " + task);
       console.log(prevSelectedProject.tasks.filter((_task) => _task !== task));
-      // return prevSelectedProject;
-      return {
-        ...prevSelectedProject,
-        tasks: prevSelectedProject.tasks.filter((_task) => _task !== task),
-      };
-      // return (prevSelectedProject.tasks = prevSelectedProject.tasks.filter(
-      //   (_task) => _task !== task,
-      // ));
     });
+  };
+
+  const handleDeleteProject = (projectTitle) => {
+    setSelectedProject(undefined);
+    setProjects([
+      ...projects.filter((project) => project.title !== projectTitle),
+    ]);
   };
 
   return (
@@ -64,6 +61,7 @@ function App() {
           <ProjectPage
             project={selectedProject}
             onClearProjectTaskClick={handleClearProjectTask}
+            onDeleteProjectClick={handleDeleteProject}
           />
         )}
       </main>
