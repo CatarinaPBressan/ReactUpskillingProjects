@@ -6,6 +6,7 @@ export default function InvestmentInput({
   defaultValue,
   decimal = false,
   onChange,
+  ...inputProps
 }) {
   const [value, setValue] = useState(defaultValue);
 
@@ -22,6 +23,7 @@ export default function InvestmentInput({
           setValue(value);
           onChange(inputId, value);
         }}
+        {...inputProps}
       />
     </p>
   );

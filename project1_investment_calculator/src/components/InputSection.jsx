@@ -30,6 +30,7 @@ export default function InputSection({ defaultValues, onInputChange }) {
           inputId="duration"
           defaultValue={defaultValues.duration}
           onChange={onInputChange}
+          min={1}
         />
       </div>
     </section>
