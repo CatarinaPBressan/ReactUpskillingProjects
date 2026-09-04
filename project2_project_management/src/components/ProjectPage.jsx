@@ -1,9 +1,8 @@
-import { useState } from "react";
-
 export default function ProjectPage({
   project,
   onClearProjectTaskClick,
   onDeleteProjectClick,
+  onAddProjectTaskClick,
 }) {
   return (
     <div id="projectPage" className="page">
@@ -22,7 +21,9 @@ export default function ProjectPage({
         <h2>Tasks</h2>
         <div className="task-input-group">
           <input type="text" placeholder="Task description" />
-          <button>Add task</button>
+          <button onClick={() => onAddProjectTaskClick("snarf")}>
+            Add task
+          </button>
         </div>
         <div>
           <ul>

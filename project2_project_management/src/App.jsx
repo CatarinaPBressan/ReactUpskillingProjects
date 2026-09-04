@@ -26,9 +26,13 @@ function App() {
   };
 
   const handleClearProjectTask = (task) => {
+    console.log(task);
     setSelectedProject((prevSelectedProject) => {
       console.log(prevSelectedProject.tasks.filter((_task) => _task !== task));
     });
+  };
+  const handleAddProjectTask = (task) => {
+    console.log(task);
   };
 
   const handleDeleteProject = (projectTitle) => {
@@ -74,6 +78,7 @@ function App() {
           <ProjectPage
             project={selectedProject}
             onClearProjectTaskClick={handleClearProjectTask}
+            onAddProjectTaskClick={handleAddProjectTask}
             onDeleteProjectClick={handleDeleteProject}
           />
         )}
