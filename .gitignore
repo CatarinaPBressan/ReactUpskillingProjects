@@ -1,39 +1,39 @@
 # Dependencies
-/node_modules
-/.pnp
-.pnp.js
+*/node_modules
+*/.pnp
+*.pnp.js
 
 # Production build outputs
-/dist
-/dist-ssr
-/build
-/out
-/.next
+*/dist
+*/dist-ssr
+*/build
+*/out
+*/.next
 
 # Testing and coverage
-/coverage
-/reports
-/*.tsbuildinfo
+*/coverage
+*/reports
+*/*.tsbuildinfo
 
 # Debug and system logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+*npm-debug.log*
+*yarn-debug.log*
+*yarn-error.log*
+*pnpm-debug.log*
 
 # Environment and local config variables (Contains sensitive API keys)
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
 *.pem
 
 # Editor-specific files / IDEs
-.vscode/*
+*.vscode/*
 !.vscode/extensions.json
-.idea/
+*.idea/
 *.suo
 *.ntvs*
 *.njsproj
@@ -42,9 +42,9 @@ pnpm-debug.log*
 *.swo
 
 # OS-specific files (System junk)
-.DS_Store
-.DS_Store?
-._*
-Thumbs.db
-ehthumbs.db
-$RECYCLE.BIN/
+*.DS_Store
+*.DS_Store?
+*._*
+*Thumbs.db
+*ehthumbs.db
+*$RECYCLE.BIN/
