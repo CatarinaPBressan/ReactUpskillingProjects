@@ -1,9 +1,12 @@
+import { useRef } from "react";
+
 export default function ProjectPage({
   project,
   onClearProjectTaskClick,
   onDeleteProjectClick,
   onAddProjectTaskClick,
 }) {
+  const addTaskInput = useRef();
   return (
     <div id="projectPage" className="page">
       <h1>{project.title}</h1>
@@ -20,8 +23,20 @@ export default function ProjectPage({
       <div className="tasks-container">
         <h2>Tasks</h2>
         <div className="task-input-group">
-          <input type="text" placeholder="Task description" />
-          <button onClick={() => onAddProjectTaskClick("snarf")}>
+          <input
+            type="text"
+            placeholder="Task description"
+            ref={addTaskInput}
+          />
+          <button
+            onClick={() => {
+              const value = addTaskInput.current.value;
+              if (!value) {
+                return;
+              }
+              onAddProjectTaskClick(value);
+            }}
+          >
             Add task
           </button>
         </div>

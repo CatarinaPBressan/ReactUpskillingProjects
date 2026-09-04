@@ -9,7 +9,7 @@ import Sidebar from "./components/Sidebar";
 projects:
 [{
   title: "Project Title",
-  dueDate: "04/09/2026",
+  dueDate: "2026-01-01",
   description: "Project description",
   tasks: ["Implement the React Project Management project"]
 }]*/
