@@ -1,3 +1,5 @@
+import Input from "./Input";
+
 export default function CreateProjectPage({
   onCancelClick,
   onCreateProjectClick,
@@ -14,22 +16,17 @@ export default function CreateProjectPage({
             onCreateProjectClick(data);
           }}
         >
-          <div className="controls">
-            <button onClick={onCancelClick}>Cancel</button>
-            <button type="submit">Save</button>
-          </div>
-          <div className="input-group">
-            <label htmlFor="title">Project title</label>
-            <input type="text" id="title" required name="title" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="description">Project description</label>
-            <textarea id="description" name="description" />
-          </div>
-          <div className="input-group">
-            <label htmlFor="dueDate">Due date</label>
-            <input type="date" id="dueDate" required name="dueDate" />
-          </div>
+          <menu className="controls">
+            <button className="danger" onClick={onCancelClick}>
+              Cancel
+            </button>
+            <button className="confirm" type="submit">
+              Save
+            </button>
+          </menu>
+          <Input label="Project Title" id="title" required />
+          <Input label="Project Description" isTextArea id="description" />
+          <Input type="date" label="Due date" id="dueDate" required />
         </form>
       </section>
     </div>

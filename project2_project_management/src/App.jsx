@@ -5,57 +5,99 @@ import NoProjectPage from "./components/NoProjectPage";
 import ProjectPage from "./components/ProjectPage";
 import Sidebar from "./components/Sidebar";
 
-/*
-projects:
-[{
-  title: "Project Title",
-  dueDate: "2026-01-01",
-  description: "Project description",
-  tasks: ["Implement the React Project Management project"]
-}]*/
 function App() {
+  /*
+  [{
+    id: "uuid",
+    title: "Project Title",
+    dueDate: "2026-01-01",
+    description: "Project description",
+  }]
+  */
   const [projects, setProjects] = useState([]);
-  const [isCreatingProject, setIsCreatingProject] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(undefined);
 
-  const handleSelectProject = (projectTitle) => {
-    setIsCreatingProject(false);
-    setSelectedProject(
-      projects.find((project) => project.title === projectTitle),
-    );
-  };
+  /*
+  [{
+    id: "uuid",
+    text: "text"
+    projectId: "projectId"
+  }]
+  */
+  const [tasks, setTasks] = useState([]);
 
-  const handleClearProjectTask = (task) => {
-    console.log(task);
+  /*
+    null: No Project selected
+    undefined: Creating Project
+    {project}: Project page
+   */
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  const handleSelectProject = (projectId) => {
     setSelectedProject((prevSelectedProject) => {
-      console.log(prevSelectedProject.tasks.filter((_task) => _task !== task));
+      if (prevSelectedProject && projectId === prevSelectedProject.id) {
+        return null;
+      }
+      return projects.find((project) => project.id == projectId);
     });
   };
-  const handleAddProjectTask = (task) => {
-    console.log(task);
+
+  const handleClearProjectTask = (taskToDelete) => {
+    setTasks(tasks.filter((task) => task.id !== taskToDelete.id));
+  };
+  const handleAddProjectTask = (text) => {
+    const task = {
+      id: crypto.randomUUID(),
+      text,
+      projectId: selectedProject.id,
+    };
+    setTasks([...tasks, task]);
   };
 
-  const handleDeleteProject = (projectTitle) => {
-    setSelectedProject(undefined);
-    setProjects([
-      ...projects.filter((project) => project.title !== projectTitle),
-    ]);
+  const handleDeleteProject = (projectId) => {
+    setSelectedProject(null);
+    setProjects(projects.filter((project) => project.id !== projectId));
   };
 
   const handleAddProjectClick = () => {
     setSelectedProject(undefined);
-    setIsCreatingProject(true);
   };
 
   const handleCancelCreatingProjectClick = () => {
-    setIsCreatingProject(false);
+    setSelectedProject(null);
   };
 
   const handleCreateProjectClick = (projectData) => {
-    const newProject = { ...projectData, tasks: [] };
+    const newProject = {
+      ...projectData,
+      tasks: [],
+      id: crypto.randomUUID(),
+    };
     setProjects([...projects, newProject]);
-    setIsCreatingProject(false);
+    setSelectedProject(newProject);
   };
+
+  let content;
+  if (selectedProject === null) {
+    content = <NoProjectPage onAddProjectClick={handleAddProjectClick} />;
+  } else if (selectedProject === undefined) {
+    content = (
+      <CreateProjectPage
+        onCancelClick={handleCancelCreatingProjectClick}
+        onCreateProjectClick={handleCreateProjectClick}
+      />
+    );
+  } else {
+    content = (
+      <ProjectPage
+        project={selectedProject}
+        onClearProjectTaskClick={handleClearProjectTask}
+        onAddProjectTaskClick={handleAddProjectTask}
+        onDeleteProjectClick={handleDeleteProject}
+        onDeselectProjectClick={handleSelectProject}
+        tasks={tasks.filter((task) => task.projectId === selectedProject.id)}
+      />
+    );
+  }
 
   return (
     <div id="pageContainer">
@@ -63,26 +105,9 @@ function App() {
         projects={projects}
         onSelectProject={handleSelectProject}
         onAddProjectClick={handleAddProjectClick}
+        selectedProjectId={selectedProject && selectedProject.id}
       />
-      <main>
-        {!selectedProject && !isCreatingProject && (
-          <NoProjectPage onAddProjectClick={handleAddProjectClick} />
-        )}
-        {!selectedProject && isCreatingProject && (
-          <CreateProjectPage
-            onCancelClick={handleCancelCreatingProjectClick}
-            onCreateProjectClick={handleCreateProjectClick}
-          />
-        )}
-        {selectedProject && (
-          <ProjectPage
-            project={selectedProject}
-            onClearProjectTaskClick={handleClearProjectTask}
-            onAddProjectTaskClick={handleAddProjectTask}
-            onDeleteProjectClick={handleDeleteProject}
-          />
-        )}
-      </main>
+      <main>{content}</main>
     </div>
   );
 }

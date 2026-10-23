@@ -42,12 +42,33 @@ main {
 
 #noProjectPage {
   align-content: center;
+  button.createProject {
+    padding: 1rem;
+    font-size: large;
+    border: none;
+    border-radius: 10px;
+  }
 }
 
 .controls {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
+
+  button {
+    font-size: larger;
+    padding: 0.75rem;
+    background-color: lightgray;
+    border: none;
+    border-radius: 10px;
+  }
+
+  button.danger {
+    background-color: none;
+  }
+  button.confirm {
+    background-color: lightgreen;
+  }
 }
 
 .inputs {
@@ -92,4 +113,28 @@ main {
 
 ul {
   list-style-type: none;
+}
+
+#sidebar {
+  button {
+    border: none;
+    border-radius: 10px;
+    padding: 0.25rem;
+    width: 100%;
+  }
+  button.create-project-button {
+    padding: 0.5rem;
+    background-color: lightgreen;
+  }
+  button.selected-project-button {
+    background-color: lightgreen;
+  }
+}
+
+#createProjectPage,
+#projectPage {
+  width: 66%;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 1rem;
 }
